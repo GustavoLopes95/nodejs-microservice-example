@@ -4,22 +4,22 @@ export default function buildUserRepository(userDb) {
     getAll,
     find,
     insert,
-    delete
+    remove
   });
 
-  const getAll = ({ userDb }) => {
+  async function getAll({ userDb }) {
     userDb.findAll();
   }
 
-  const find = ({ userDb, id }) => {
+  async function find({ userDb, id }) {
     userDb.find(id);
   }
 
-  const insert = ({ userDb, user }) => {
+  async function insert({ userDb, user }) {
     userDb.insert(user);
   }
 
-  const delete = ({ userDb, id }) => {
-    userDb.delete(id);
+  async function remove({ userDb, id }) {
+    userDb.remove(id);
   }
 }
