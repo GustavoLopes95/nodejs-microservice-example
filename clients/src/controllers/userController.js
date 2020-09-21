@@ -1,18 +1,12 @@
 const express = require('express');
 
-const UserModel = require('../models/user');
+const { createUser }  = require('../entities/user/use-cases');
 
 const router = express.Router();
 
 router.post('/',  async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-
-    if(UserModel.findOne({ email })) throw { code: 400, message: `The user with email ${email} already exists`};
-
-    const newUser = await UserModel.create({ name, email, password });
-    newUser.password = undefined;
-
+    const newUser = await createUser(req.body);
     return res.send({ newUser });
   } catch(err) {
     if(err && err.code) {

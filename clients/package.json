@@ -4,7 +4,7 @@
   "description": "Test microfrontend",
   "main": "index.js",
   "scripts": {
-    "dev": "node node_modules/nodemon/bin/nodemon bin/server",
+    "dev": "node node_modules/nodemon/bin/nodemon --exec babel-node bin/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Luiz Gustavo A. Lopes",
@@ -19,6 +19,10 @@
     "mongoose": "^5.9.28"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
     "nodemon": "^2.0.4"
   }
 }
