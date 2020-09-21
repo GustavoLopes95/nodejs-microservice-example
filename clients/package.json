@@ -1,0 +1,24 @@
+{
+  "name": "microfrontend",
+  "version": "1.0.0",
+  "description": "Test microfrontend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node node_modules/nodemon/bin/nodemon bin/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luiz Gustavo A. Lopes",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parse": "^0.1.0",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mangodb": "^1.0.0",
+    "mongoose": "^5.9.28"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
