@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 
-const { createUser }  = require('../entities/user/use-cases');
+import { createUser } from '../entities/user/use-cases';
 
 const router = express.Router();
 
@@ -9,10 +9,11 @@ router.post('/',  async (req, res) => {
     const newUser = await createUser(req.body);
     return res.send({ newUser });
   } catch(err) {
+    console.log('err', err);
     if(err && err.code) {
       return res.status(err.code).send({ menssage: err.message });  
     }
-    return res.status(400).send({ err, menssage: 'User registration fail !'});
+    return res.status(400).send({ err, menssage: err});
   }
 })
 

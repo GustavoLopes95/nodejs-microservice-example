@@ -1,5 +1,5 @@
 
-export default function makeUserModel({ userDb, crypt }) {
+export default function makeUserSchemma(userDb) {
   const userSchema = new userDb.Schema({
     name: { 
       type: String,
@@ -22,13 +22,10 @@ export default function makeUserModel({ userDb, crypt }) {
     }
   });
 
-  userSchema.pre('save', async function(next) {
-    const hash = await crypt.hash(this.password, 10);
-
-    this.password = hash;
-
-    next();
-  });
+  userDb.model('User', userSchema)
   
-  return userDb.model('User', userSchema);
+  return {
+    insert: (user) => userDb.create(user),
+    find: (params) =>  userDb.findOne(params),
+  };
 }

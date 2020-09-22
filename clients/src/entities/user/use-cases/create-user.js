@@ -1,16 +1,19 @@
-export default function makeCreateUser({ userDb }) {
+export default function makeCreateUser({ userDb, makeUserModel }) {
   return async function createUser({
       name,
       password,
       email,
     }) {
+    const user = makeUserModel({ name, password, email });
+    console.log(user);
+    if(userDb.find({ email: user.getEmail() })) throw { code: 400, message: 'User already exists'};
 
-    const valid = [name, password, email].filter(proprety => proprety);
-    if(valid.length != 3) throw { code: 400, message: 'Invalids params'};
-    if(userDb.findOne({ password })) throw { code: 400, message: 'User already exists'};
-
-    const newUser = await userDb.create({ name, password, email });
-    newUser.password = undefined;
+    const hash = await user.getPassword();
+    const newUser = await userDb.insert({ 
+      name: user.getName(), 
+      password: hash,
+      email:  user.getEmail()
+    });
 
     return newUser;
   }

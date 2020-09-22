@@ -1,12 +1,10 @@
-import userModel from '../data-access';
+import userRepository from '../data-access';
+import makeUserModel from '../model';
 import makeCreateUser from './create-user';
 
-const userModel = makeUserModel({ mongoose, bcrypt });
+const createUser = makeCreateUser({ userRepository, makeUserModel });
 
-const createUser = makeCreateUser({ userModel });
-
-const createService = Object.freeze({
+export default Object.freeze({
   createUser
 });
-
-modules.exports = createService;
+export { createUser };
